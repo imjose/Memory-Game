@@ -23,9 +23,29 @@ function shuffle(array) {
     }
 
     return array;
-}
+};
 
+// function IfMatch(){
+//   document.querySelectorAll('.match').forEach(function(card){
+//   card.removeEventListener('click');
+//   })
+// }
+//
+// IfMatch();
+document.querySelectorAll('.card').forEach(function(card){
+  card.addEventListener('click', function (event){
+    console.log(event.target);
+    // event.target.classList.add('open');
+    // event.target.classList.add('show');
+  });
+});
 
+// .addEventListener ('click', function (event){
+// console.log (event.target);
+// });
+// .addEventListener('click', function (event){
+//   event.target.classList.add('open show');
+// });
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
