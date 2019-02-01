@@ -1,7 +1,9 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const cards = ['fa-diamond', 'fa-diamond', 'fa-paper-plane-o', 'fa-paper-plane-o',
+'fa-anchor', 'fa-anchor', 'fa-bolt', 'fa-bolt', 'fa-cube', 'fa-cube', 'fa-leaf', 'fa-leaf',
+'fa-bicycle', 'fa-bicycle', 'fa-bomb', 'fa-bomb'];
 
 /*
  * Display the cards on the page
@@ -21,22 +23,52 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 };
 
-// function IfMatch(){
-//   document.querySelectorAll('.match').forEach(function(card){
-//   card.removeEventListener('click');
-//   })
-// }
-//
-// IfMatch();
+function init(){
+  const body = document.querySelector('.deck');
+  let array = shuffle(cards);
+  array.forEach(function (array){
+    body.insertAdjacentHTML('afterbegin',
+      `<li class="card">
+          <i class="fa ${array}"></i>
+      </li>`
+    );
+  });
+};
+
+init();
+
+let x = false;
+let y;
+
+function Showtime (one, two){
+  one = two;
+  one.classList.add('open', 'show');
+  return one;
+};
+
+function Compare (one, two){
+  setTimeout(function () {
+    one.classList.remove('open', 'show');
+    two.classList.remove('open', 'show');
+  }, 1000);
+  if (one.querySelector('i').classList.item(1) === two.querySelector('i').classList.item(1)){
+    one.classList.add('match');
+    two.classList.add('match');
+  };
+};
+
 document.querySelectorAll('.card').forEach(function(card){
   card.addEventListener('click', function (event){
-    console.log(event.target);
-    // event.target.classList.add('open');
-    // event.target.classList.add('show');
+    if (x === false){
+      x = Showtime(x, card);
+    } else {
+      y = Showtime(y, card);
+      Compare(x, y);
+      x = false;
+    };
   });
 });
 
